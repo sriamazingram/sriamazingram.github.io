@@ -241,7 +241,7 @@
 
         <div class="section-title">
           <h2>Resume</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <p>Here is a detailed breakdown of my academic and professional experience. Have fun. :)</p>
         </div>
 
         <div class="row">
@@ -268,7 +268,9 @@
               <h4>Bachelor of Technology (Hons.) Computer Science and Engineering</h4>
               <h5>2010 - 2014</h5>
               <p><em>Indian Institute of Information Technology, Sri City, India</em></p>
-              <p></p>
+              <p>
+                Primary focus of honors research was Literature-based knowledge discovery of scientific articles. Published a paper 
+              </p>
             </div>
           </div>
           <div class="col-lg-6">
@@ -654,7 +656,7 @@
 
           <div class="col-lg-8 mt-5 mt-lg-0">
 
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+            <form id="my-form" action="https://formspree.io/f/xknpqqqy" method="post" role="form" class="php-email-form">
               <div class="form-row">
                 <div class="col-md-6 form-group">
                   <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
@@ -735,6 +737,58 @@
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 
+  <!-- Contact Us script -->
+  <script>
+    window.addEventListener("DOMContentLoaded", function() {
+  
+      // get the form elements defined in your form HTML above
+      
+      var form = document.getElementById("my-form");
+      var button = document.getElementById("my-form-button");
+      var error_status = document.getElementsByClassName("error-message")[0];
+      var success_status = document.getElementsByClassName("sent-message")[0];
+      var loading = document.getElementsByClassName("loading")[0];
+  
+      // Success and Error functions for after the form is submitted
+      
+      function success() {
+        form.reset();
+        loading.style = "display: none";
+        success_status.style = "display: block";
+      }
+  
+      function error() {
+        loading.style = "display: none";
+        error_status.style = "display: block";
+        error_status.innerHTML = "Oops! There was a problem.";
+      }
+  
+      // handle the form submission event
+  
+      form.addEventListener("submit", function(ev) {
+        ev.preventDefault();
+        var data = new FormData(form);
+        ajax(form.method, form.action, data, success, error);
+      });
+    });
+    
+    // helper function for sending an AJAX request
+  
+    function ajax(method, url, data, success, error) {
+      var xhr = new XMLHttpRequest();
+      xhr.open(method, url);
+      xhr.setRequestHeader("Accept", "application/json");
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState !== XMLHttpRequest.DONE) return;
+        if (xhr.status === 200) {
+          success(xhr.response, xhr.responseType);
+        } else {
+          error(xhr.status, xhr.response, xhr.responseType);
+        }
+      };
+      xhr.send(data);
+    }
+  </script>
 </body>
 
 </html>
